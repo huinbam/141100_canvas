@@ -80,7 +80,7 @@ namespace TEST_C01
             flag_drawtype = 3;
         }
 
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        private void picture_window_MouseDown(object sender, MouseEventArgs e)
         {
             if(flag_drawtype==0)
             {
@@ -93,9 +93,9 @@ namespace TEST_C01
             pen.Color = dColor;
             sBrush.Color = fColor;
         }
-        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        private void picture_window_MouseMove(object sender, MouseEventArgs e)
         {
-            Graphics graphics = panel1.CreateGraphics();
+            Graphics graphics = picture_window.CreateGraphics();
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
             if(isDrawing==true)
             {
@@ -105,7 +105,7 @@ namespace TEST_C01
             }
             toolStripStatusLabel1.Text = "현재위치: " + e.X + ", " + e.Y;
         }
-        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        private void picture_window_MouseUp(object sender, MouseEventArgs e)
         {
             ePoint.X = e.X;
             ePoint.Y = e.Y;
@@ -134,7 +134,7 @@ namespace TEST_C01
 
             Rectangle guide_rect = new Rectangle(point.X, point.Y, width, height);
 
-            Graphics graphics = panel1.CreateGraphics();
+            Graphics graphics = picture_window.CreateGraphics();
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             switch (flag_drawtype)
@@ -162,7 +162,7 @@ namespace TEST_C01
 
         private void 새그림ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            panel1.Invalidate(); //초기화
+            picture_window.Invalidate(); //초기화
         }
 
         private void Trans_CheckStateChanged(object sender, EventArgs e)
@@ -187,8 +187,8 @@ namespace TEST_C01
 
         private void 저장하기ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap = new Bitmap(panel1.Width, panel1.Height);
-            panel1.DrawToBitmap(bitmap, new Rectangle(0, 0, panel1.Width, panel1.Height));
+            Bitmap bitmap = new Bitmap(picture_window.Width, picture_window.Height);
+            picture_window.DrawToBitmap(bitmap, new Rectangle(0, 0, picture_window.Width, picture_window.Height));
             bitmap.Save(@"TEST.bmp"); ///안됨.빈이미지저장됨
         }
         private void PenWidth_bar_Scroll(object sender, EventArgs e)

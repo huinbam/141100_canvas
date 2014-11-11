@@ -44,16 +44,17 @@
             this.DrawFree = new System.Windows.Forms.ToolStripButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.Trans = new System.Windows.Forms.CheckBox();
             this.PenWidth_bar = new System.Windows.Forms.TrackBar();
             this.DashStyle_box = new System.Windows.Forms.ListBox();
+            this.picture_window = new System.Windows.Forms.PictureBox();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PenWidth_bar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picture_window)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -186,19 +187,6 @@
             this.colorDialog1.AnyColor = true;
             this.colorDialog1.FullOpen = true;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.panel1.Location = new System.Drawing.Point(0, 28);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(640, 480);
-            this.panel1.TabIndex = 1;
-            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
-            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
-            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
-            // 
             // statusStrip1
             // 
             this.statusStrip1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
@@ -254,17 +242,30 @@
             this.DashStyle_box.TabIndex = 10;
             this.DashStyle_box.SelectedIndexChanged += new System.EventHandler(this.DashStyle_box_SelectedIndexChanged);
             // 
+            // picture_window
+            // 
+            this.picture_window.BackColor = System.Drawing.Color.White;
+            this.picture_window.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picture_window.Location = new System.Drawing.Point(0, 28);
+            this.picture_window.Name = "picture_window";
+            this.picture_window.Size = new System.Drawing.Size(640, 502);
+            this.picture_window.TabIndex = 11;
+            this.picture_window.TabStop = false;
+            this.picture_window.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picture_window_MouseDown);
+            this.picture_window.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picture_window_MouseUp);
+            this.picture_window.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picture_window_MouseUp);
+            // 
             // canvas01
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(752, 530);
+            this.Controls.Add(this.picture_window);
             this.Controls.Add(this.DashStyle_box);
             this.Controls.Add(this.PenWidth_bar);
             this.Controls.Add(this.Trans);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "canvas01";
@@ -274,6 +275,7 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PenWidth_bar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picture_window)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,7 +294,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripButton Rectangle;
         private System.Windows.Forms.ToolStripButton ellipse;
         private System.Windows.Forms.StatusStrip statusStrip1;
@@ -303,6 +304,7 @@
         private System.Windows.Forms.CheckBox Trans;
         private System.Windows.Forms.TrackBar PenWidth_bar;
         private System.Windows.Forms.ListBox DashStyle_box;
+        private System.Windows.Forms.PictureBox picture_window;
     }
 }
 
