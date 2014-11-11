@@ -201,7 +201,8 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(12, 17);
+            this.toolStripStatusLabel1.Text = "-";
             // 
             // Trans
             // 
@@ -248,11 +249,11 @@
             this.picture_window.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picture_window.Location = new System.Drawing.Point(0, 28);
             this.picture_window.Name = "picture_window";
-            this.picture_window.Size = new System.Drawing.Size(640, 502);
+            this.picture_window.Size = new System.Drawing.Size(636, 477);
             this.picture_window.TabIndex = 11;
             this.picture_window.TabStop = false;
             this.picture_window.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picture_window_MouseDown);
-            this.picture_window.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picture_window_MouseUp);
+            this.picture_window.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picture_window_MouseMove);
             this.picture_window.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picture_window_MouseUp);
             // 
             // canvas01
