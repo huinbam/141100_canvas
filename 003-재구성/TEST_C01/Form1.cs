@@ -138,7 +138,12 @@ namespace TEST_C01
 
             Rectangle guide_rect = new Rectangle(point.X, point.Y, width, height);
 
-            Graphics graphics = picture_window.CreateGraphics();
+            ///Graphics graphics = picture_window.CreateGraphics();
+            ///
+            Bitmap map = new Bitmap(600, 500);
+            Graphics graphics = Graphics.FromImage(map);
+
+            ///
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             switch (flag_drawtype)
@@ -151,6 +156,7 @@ namespace TEST_C01
                 case 1:
                     graphics.DrawRectangle(pen, guide_rect);
                     graphics.FillRectangle(sBrush, guide_rect);
+
                     break;
                 case 2:
                     graphics.DrawEllipse(pen, guide_rect);
@@ -162,6 +168,10 @@ namespace TEST_C01
                     pen.DashCap = DashCap.Flat; //원래대로
                     break;
             }
+            ///
+            picture_window.Image = map;
+            map.Save(@"TEST.bmp"); ///오됨.빈이미지저장됨
+            ///
         }
 
         private void 새그림ToolStripMenuItem_Click(object sender, EventArgs e)
