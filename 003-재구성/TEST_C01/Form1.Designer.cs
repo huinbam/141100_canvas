@@ -75,7 +75,7 @@
             this.DrawFree});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(197, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(228, 31);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -94,21 +94,21 @@
             // 새그림ToolStripMenuItem
             // 
             this.새그림ToolStripMenuItem.Name = "새그림ToolStripMenuItem";
-            this.새그림ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.새그림ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.새그림ToolStripMenuItem.Text = "새그림";
             this.새그림ToolStripMenuItem.Click += new System.EventHandler(this.새그림ToolStripMenuItem_Click);
             // 
             // 저장하기ToolStripMenuItem
             // 
             this.저장하기ToolStripMenuItem.Name = "저장하기ToolStripMenuItem";
-            this.저장하기ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.저장하기ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.저장하기ToolStripMenuItem.Text = "저장하기";
             this.저장하기ToolStripMenuItem.Click += new System.EventHandler(this.저장하기ToolStripMenuItem_Click);
             // 
             // 종료ToolStripMenuItem
             // 
             this.종료ToolStripMenuItem.Name = "종료ToolStripMenuItem";
-            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.종료ToolStripMenuItem.Text = "종료";
             this.종료ToolStripMenuItem.Click += new System.EventHandler(this.종료ToolStripMenuItem_Click);
             // 
@@ -192,9 +192,9 @@
             this.statusStrip1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 508);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 629);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(752, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(919, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -218,7 +218,7 @@
             // 
             // PenWidth_bar
             // 
-            this.PenWidth_bar.Location = new System.Drawing.Point(642, 28);
+            this.PenWidth_bar.Location = new System.Drawing.Point(806, 28);
             this.PenWidth_bar.Maximum = 20;
             this.PenWidth_bar.Minimum = 2;
             this.PenWidth_bar.Name = "PenWidth_bar";
@@ -237,7 +237,7 @@
             "Dash",
             "Dash-Dot",
             "Dash-Dot-Dot"});
-            this.DashStyle_box.Location = new System.Drawing.Point(646, 65);
+            this.DashStyle_box.Location = new System.Drawing.Point(813, 66);
             this.DashStyle_box.Name = "DashStyle_box";
             this.DashStyle_box.Size = new System.Drawing.Size(94, 64);
             this.DashStyle_box.TabIndex = 10;
@@ -249,7 +249,7 @@
             this.picture_window.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picture_window.Location = new System.Drawing.Point(0, 28);
             this.picture_window.Name = "picture_window";
-            this.picture_window.Size = new System.Drawing.Size(636, 477);
+            this.picture_window.Size = new System.Drawing.Size(800, 600);
             this.picture_window.TabIndex = 11;
             this.picture_window.TabStop = false;
             this.picture_window.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picture_window_MouseDown);
@@ -261,7 +261,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(752, 530);
+            this.ClientSize = new System.Drawing.Size(919, 651);
             this.Controls.Add(this.picture_window);
             this.Controls.Add(this.DashStyle_box);
             this.Controls.Add(this.PenWidth_bar);
