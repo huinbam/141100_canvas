@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Windows;
 using System.Drawing.Drawing2D;
 using System.Collections;
+using System.IO;
 
 namespace TEST_C01
 {
@@ -22,13 +23,10 @@ namespace TEST_C01
         Color temp_color = new Color();
         bool isDrawing;
         bool check_trans = false;
-        //Bitmap map = new Bitmap(800, 600);
         Bitmap draw_area = new Bitmap(800, 600);
 
         int count=0;
         ArrayList current_points = new ArrayList();
-
-        //private BufferedGraphics buffer_grahpics;
 
         public canvas01()
         {
@@ -38,24 +36,29 @@ namespace TEST_C01
         }
         public void temp_Canvas(PictureBox pb, MouseEventArgs e)
         {
-            /*
-            Size drawingSize = new Size(640, 480);
-            var buffered_graphics = BufferedGraphicsManager.Current;
-            buffer_grahpics = buffered_graphics.Allocate(this.CreateGraphics(), new Rectangle(new Point(0, 0), drawingSize));
-            var g = buffer_grahpics.Graphics;
-            g.FillRectangle(Brushes.Beige, 0, 0, drawingSize.Width, drawingSize.Height);
-            */
             Graphics paint_graphics = Graphics.FromImage(draw_area);
             paint_graphics.SmoothingMode = SmoothingMode.AntiAlias;
             pb.Image = draw_area;
             draw_area.Save(@"temp.bmp"); ///오됨.
         }
-        public void save_Canvas(PictureBox pb, SaveFileDialog savefile)
+        public void save_Canvas(PictureBox pb, EventArgs e)
         {
-            Graphics paint_graphics = Graphics.FromImage(draw_area);
-            paint_graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            pb.Image = draw_area;
-            draw_area.Save(@"temp.bmp"); ///오됨.
+            saveFileDialog1.Title = "이미지파일저장";
+            saveFileDialog1.DefaultExt = "jpg";
+            saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.Title = "Save an Image File **";
+
+            Stream myStream;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if ((myStream = saveFileDialog1.OpenFile()) != null)
+                {
+                    // Code to write the stream goes here.
+                    myStream.Close();
+                }
+            }
         }
 
         private void dColor_btn_Click(object sender, EventArgs e)
@@ -176,25 +179,27 @@ namespace TEST_C01
                     pen.DashCap = DashCap.Flat; //원래대로
                     break;
             }
-            ///
-            //picture_window.Image = draw_area;
-            //draw_area.Save(@"TEST.bmp"); ///오됨.
-            ///
             temp_Canvas(picture_window, e);
         }
 
         private void 새그림ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Graphics graphics = picture_window.CreateGraphics();
-            new_canvas(picture_window);
-        }
-        public void new_canvas(PictureBox pb)
-        {
-            //pb.BackColor = Color.White;
             Bitmap draw_area_temp = new Bitmap(800, 600);
             draw_area = draw_area_temp;
             Graphics graphics = Graphics.FromImage(draw_area_temp);
             graphics.Clear(Color.White);
+
+        }
+        public void new_canvas(PictureBox pb)
+        {
+            Bitmap draw_area_temp = new Bitmap(800, 600);
+            draw_area = draw_area_temp;
+            Graphics graphics = Graphics.FromImage(draw_area_temp);
+            graphics.Clear(Color.White);
+
+            Graphics paint_graphics = Graphics.FromImage(draw_area);
+            paint_graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            pb.Image = draw_area;
         }
 
         private void Trans_CheckStateChanged(object sender, EventArgs e)
@@ -219,14 +224,25 @@ namespace TEST_C01
 
         private void 저장하기ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.ShowDialog();
-            /*
-            Bitmap bitmap = new Bitmap(picture_window.Width, picture_window.Height);
-            picture_window.DrawToBitmap(bitmap, new Rectangle(0, 0, picture_window.Width, picture_window.Height));
-            bitmap.Save(@"TEST.bmp"); ///안됨.빈이미지저장됨
-            */
-            System.IO.FileStream fa = (System.IO.FileStream)saveFileDialog1.OpenFile();
-            save_Canvas(picture_window, saveFileDialog1);
+            saveFileDialog1.Title = "이미지파일저장";
+            saveFileDialog1.DefaultExt = "jpg";
+            saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.Title = "Save an Image File **";
+            //saveFileDialog1.ShowDialog();
+
+            Stream myStream;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if ((myStream = saveFileDialog1.OpenFile()) != null)
+                {
+                    // Code to write the stream goes here.
+                    myStream.Close();
+                }
+            }
+            save_Canvas(picture_window, e);
         }
         private void PenWidth_bar_Scroll(object sender, EventArgs e)
         {
