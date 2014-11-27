@@ -42,6 +42,10 @@
             this.ellipse = new System.Windows.Forms.ToolStripButton();
             this.Line = new System.Windows.Forms.ToolStripButton();
             this.DrawFree = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.이동 = new System.Windows.Forms.ToolStripButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -72,10 +76,14 @@
             this.Rectangle,
             this.ellipse,
             this.Line,
-            this.DrawFree});
+            this.DrawFree,
+            this.toolStripSeparator3,
+            this.toolStripButton1,
+            this.toolStripButton2,
+            this.이동});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(228, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(352, 31);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -94,21 +102,21 @@
             // 새그림ToolStripMenuItem
             // 
             this.새그림ToolStripMenuItem.Name = "새그림ToolStripMenuItem";
-            this.새그림ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.새그림ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.새그림ToolStripMenuItem.Text = "새그림";
             this.새그림ToolStripMenuItem.Click += new System.EventHandler(this.새그림ToolStripMenuItem_Click);
             // 
             // 저장하기ToolStripMenuItem
             // 
             this.저장하기ToolStripMenuItem.Name = "저장하기ToolStripMenuItem";
-            this.저장하기ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.저장하기ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.저장하기ToolStripMenuItem.Text = "저장하기";
             this.저장하기ToolStripMenuItem.Click += new System.EventHandler(this.저장하기ToolStripMenuItem_Click);
             // 
             // 종료ToolStripMenuItem
             // 
             this.종료ToolStripMenuItem.Name = "종료ToolStripMenuItem";
-            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.종료ToolStripMenuItem.Text = "종료";
             this.종료ToolStripMenuItem.Click += new System.EventHandler(this.종료ToolStripMenuItem_Click);
             // 
@@ -182,6 +190,39 @@
             this.DrawFree.Text = "DrawFree_btn";
             this.DrawFree.Click += new System.EventHandler(this.DrawFree_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(43, 28);
+            this.toolStripButton1.Text = "확대+";
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(40, 28);
+            this.toolStripButton2.Text = "축소-";
+            // 
+            // 이동
+            // 
+            this.이동.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.이동.Image = ((System.Drawing.Image)(resources.GetObject("이동.Image")));
+            this.이동.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.이동.Name = "이동";
+            this.이동.Size = new System.Drawing.Size(35, 28);
+            this.이동.Text = "이동";
+            this.이동.Click += new System.EventHandler(this.이동_Click);
+            // 
             // colorDialog1
             // 
             this.colorDialog1.AnyColor = true;
@@ -208,9 +249,10 @@
             // 
             this.Trans.AutoSize = true;
             this.Trans.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.Trans.Location = new System.Drawing.Point(200, 6);
+            this.Trans.Location = new System.Drawing.Point(324, 3);
             this.Trans.Name = "Trans";
-            this.Trans.Size = new System.Drawing.Size(48, 16);
+            this.Trans.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.Trans.Size = new System.Drawing.Size(48, 21);
             this.Trans.TabIndex = 8;
             this.Trans.Text = "투명";
             this.Trans.UseVisualStyleBackColor = false;
@@ -249,6 +291,7 @@
             this.picture_window.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picture_window.Location = new System.Drawing.Point(0, 28);
             this.picture_window.Name = "picture_window";
+            this.picture_window.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.picture_window.Size = new System.Drawing.Size(800, 600);
             this.picture_window.TabIndex = 11;
             this.picture_window.TabStop = false;
@@ -306,6 +349,10 @@
         private System.Windows.Forms.TrackBar PenWidth_bar;
         private System.Windows.Forms.ListBox DashStyle_box;
         private System.Windows.Forms.PictureBox picture_window;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton 이동;
     }
 }
 

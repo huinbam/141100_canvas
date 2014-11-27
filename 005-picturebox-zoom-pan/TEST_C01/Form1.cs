@@ -19,13 +19,21 @@ namespace TEST_C01
         int flag_drawtype = 0; ///작업설정
         Point sPoint, ePoint; //시작점,끝점
         Pen pen = new Pen(Color.Transparent);
-        SolidBrush sBrush =new SolidBrush(Color.Transparent);
+        SolidBrush sBrush = new SolidBrush(Color.Transparent);
         Color temp_color = new Color();
         bool isDrawing;
         bool check_trans = false;
         Bitmap draw_area = new Bitmap(800, 600);
 
-        int count=0;
+        public const int temp_num = 20;
+        int[] temp_sx = new int[temp_num];
+        int[] temp_sy = new int[temp_num];
+        int[] temp_ex = new int[temp_num];
+        int[] temp_ey = new int[temp_num];
+        int[] temp_drawtype = new int[temp_num];
+        int temp_count = 0;
+
+        int count = 0;
         ArrayList current_points = new ArrayList();
 
         public canvas01()
@@ -72,7 +80,7 @@ namespace TEST_C01
             colorDialog2.ShowDialog();
             fColor_selected.BackColor = colorDialog2.Color;
             fColor = colorDialog2.Color;
-            if (check_trans==true)
+            if (check_trans == true)
             {
                 temp_color = fColor;
                 fColor = Color.Transparent;
@@ -98,7 +106,7 @@ namespace TEST_C01
 
         private void picture_window_MouseDown(object sender, MouseEventArgs e)
         {
-            if(flag_drawtype==0)
+            if (flag_drawtype == 0)
             {
                 isDrawing = true;
                 current_points.Add(new Point(e.X, e.Y));
@@ -114,7 +122,7 @@ namespace TEST_C01
             Graphics graphics = Graphics.FromImage(draw_area);
             //Graphics graphics = picture_window.CreateGraphics();
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            if(isDrawing==true)
+            if (isDrawing == true)
             {
                 graphics.DrawLine(pen, (Point)current_points[count], e.Location);
                 current_points.Add(e.Location);
@@ -128,7 +136,33 @@ namespace TEST_C01
             ePoint.Y = e.Y;
 
             Point point = new Point();
-            int width, height;
+            int move_x, move_y;
+
+            /*
+            if (sPoint.X <= ePoint.X)
+            {
+                point.X = sPoint.X;
+                temp_sx[temp_count] = sPoint.X;
+                temp_ex[temp_count] = ePoint.X;
+            }
+            else
+            {
+                point.X = ePoint.X;
+                temp_sx[temp_count] = ePoint.X;
+                temp_ex[temp_count] = sPoint.X;
+            }
+            if (sPoint.Y <= ePoint.Y)
+            {
+                point.Y = sPoint.Y;
+                temp_sy[temp_count] = sPoint.Y;
+                temp_ey[temp_count] = ePoint.Y;
+            }
+            else
+            {
+                point.Y = ePoint.Y;
+                temp_sy[temp_count] = ePoint.Y;
+                temp_ey[temp_count] = sPoint.Y;
+            }*/
 
             if (sPoint.X <= ePoint.X)
             {
@@ -146,15 +180,21 @@ namespace TEST_C01
             {
                 point.Y = ePoint.Y;
             }
-            width = Math.Abs(sPoint.X-ePoint.X);
-            height = Math.Abs(sPoint.Y-ePoint.Y);
+            if (flag_drawtype >= 1 && flag_drawtype <=3)
+            {
+                temp_sx[temp_count] = sPoint.X;
+                temp_sy[temp_count] = sPoint.Y;
+                temp_ex[temp_count] = ePoint.X;
+                temp_ey[temp_count] = ePoint.Y;
+            }
+            
+            temp_drawtype[temp_count] = flag_drawtype;
+            move_x = ePoint.X - sPoint.X; //이동
+            move_y = ePoint.Y - sPoint.Y; //이동
 
-            Rectangle guide_rect = new Rectangle(point.X, point.Y, width, height);
-
-            ///Graphics graphics = picture_window.CreateGraphics();
-            //Bitmap map = new Bitmap(800, 600);
+            Rectangle guide_rect = new Rectangle(point.X, point.Y, Math.Abs(move_x), Math.Abs(move_y));
             Graphics graphics = Graphics.FromImage(draw_area);
-            ///
+
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             switch (flag_drawtype)
@@ -167,16 +207,57 @@ namespace TEST_C01
                 case 1:
                     graphics.DrawRectangle(pen, guide_rect);
                     graphics.FillRectangle(sBrush, guide_rect);
-
+                    //temp_drawtype[temp_count] = 1;
+                    temp_count++;
                     break;
                 case 2:
                     graphics.DrawEllipse(pen, guide_rect);
                     graphics.FillEllipse(sBrush, guide_rect);
+                    temp_count++;
                     break;
                 case 3:
                     //pen.DashCap = DashCap.Round; //라운딩
                     graphics.DrawLine(pen, sPoint, ePoint);
                     pen.DashCap = DashCap.Flat; //원래대로
+                    temp_count++;
+                    break;
+                case 4:
+                    for (int i = 0; i < temp_num; i++)
+                    {
+                        if (temp_sx[i] <= temp_ex[i])
+                        {
+                            point.X = temp_sx[i];
+                        }
+                        else
+                        {
+                            point.X = temp_ex[i];
+                        }
+                        if (temp_sy[i] <= temp_ey[i])
+                        {
+                            point.Y = temp_sy[i];
+                        }
+                        else
+                        {
+                            point.Y = temp_ey[i];
+                        }
+                        Rectangle guide_rect_move = new Rectangle(point.X + move_x, point.Y + move_y, Math.Abs(temp_sx[i] - temp_ex[i]), Math.Abs(temp_sy[i] - temp_ey[i]));
+                        if (temp_drawtype[i] == 1)
+                        {
+                            graphics.DrawRectangle(pen, guide_rect_move);
+                            graphics.FillRectangle(sBrush, guide_rect_move);
+                        }
+                        if (temp_drawtype[i] == 2)
+                        {
+                            graphics.DrawEllipse(pen, guide_rect_move);
+                            graphics.FillEllipse(sBrush, guide_rect_move);
+                        }
+                        if (temp_drawtype[i] == 3)
+                        {
+                            Point move_start = new Point (temp_sx[i] + move_x, temp_sy[i] + move_y);
+                            Point move_end = new Point(temp_ex[i] + move_x, temp_ey[i] + move_y);
+                            graphics.DrawLine(pen, move_start, move_end);
+                        }
+                    }
                     break;
             }
             temp_Canvas(picture_window, e);
@@ -204,7 +285,7 @@ namespace TEST_C01
 
         private void Trans_CheckStateChanged(object sender, EventArgs e)
         {
-            if(Trans.Checked==true)
+            if (Trans.Checked == true)
             {
                 temp_color = fColor;
                 fColor = Color.Transparent;
@@ -251,7 +332,7 @@ namespace TEST_C01
 
         private void DashStyle_box_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch(DashStyle_box.SelectedIndex)
+            switch (DashStyle_box.SelectedIndex)
             {
                 case 0:
                     pen.DashStyle = DashStyle.Solid;
@@ -269,6 +350,11 @@ namespace TEST_C01
                     pen.DashStyle = DashStyle.DashDotDot;
                     break;
             }
+        }
+
+        private void 이동_Click(object sender, EventArgs e)
+        {
+            flag_drawtype = 4;
         }
     }
 }

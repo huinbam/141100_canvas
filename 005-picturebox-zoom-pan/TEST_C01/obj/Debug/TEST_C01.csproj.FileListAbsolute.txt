@@ -38,3 +38,11 @@ C:\Users\cho\Documents\141100_canvas\003-재구성\TEST_C01\obj\Debug\TEST_C01.c
 C:\Users\cho\Documents\141100_canvas\003-재구성\TEST_C01\obj\Debug\TEST_C01.canvas01.resources
 C:\Users\cho\Documents\141100_canvas\003-재구성\TEST_C01\obj\Debug\TEST_C01.Properties.Resources.resources
 C:\Users\cho\Documents\141100_canvas\003-재구성\TEST_C01\obj\Debug\TEST_C01.csproj.GenerateResource.Cache
+C:\Users\cho\Documents\141100_canvas\005-picturebox-zoom-pan\TEST_C01\obj\Debug\TEST_C01.exe
+C:\Users\cho\Documents\141100_canvas\005-picturebox-zoom-pan\TEST_C01\obj\Debug\TEST_C01.pdb
+C:\Users\cho\Documents\141100_canvas\005-picturebox-zoom-pan\TEST_C01\bin\Debug\TEST_C01.exe
+C:\Users\cho\Documents\141100_canvas\005-picturebox-zoom-pan\TEST_C01\bin\Debug\TEST_C01.pdb
+C:\Users\cho\Documents\141100_canvas\005-picturebox-zoom-pan\TEST_C01\obj\Debug\TEST_C01.csprojResolveAssemblyReference.cache
+C:\Users\cho\Documents\141100_canvas\005-picturebox-zoom-pan\TEST_C01\obj\Debug\TEST_C01.canvas01.resources
+C:\Users\cho\Documents\141100_canvas\005-picturebox-zoom-pan\TEST_C01\obj\Debug\TEST_C01.Properties.Resources.resources
+C:\Users\cho\Documents\141100_canvas\005-picturebox-zoom-pan\TEST_C01\obj\Debug\TEST_C01.csproj.GenerateResource.Cache
