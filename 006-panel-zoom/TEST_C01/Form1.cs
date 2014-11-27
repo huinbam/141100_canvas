@@ -42,32 +42,7 @@ namespace TEST_C01
             dColor = Color.Black;
             fColor = Color.White;
         }
-        public void temp_Canvas(PictureBox pb, MouseEventArgs e)
-        {
-            Graphics paint_graphics = Graphics.FromImage(draw_area);
-            paint_graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            pb.Image = draw_area;
-            draw_area.Save(@"temp.bmp"); ///오됨.
-        }
-        public void save_Canvas(PictureBox pb, EventArgs e)
-        {
-            saveFileDialog1.Title = "이미지파일저장";
-            saveFileDialog1.DefaultExt = "jpg";
-            saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
-            saveFileDialog1.FilterIndex = 1;
-            saveFileDialog1.Title = "Save an Image File **";
 
-            Stream myStream;
-
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                if ((myStream = saveFileDialog1.OpenFile()) != null)
-                {
-                    // Code to write the stream goes here.
-                    myStream.Close();
-                }
-            }
-        }
 
         private void dColor_btn_Click(object sender, EventArgs e)
         {
@@ -104,7 +79,7 @@ namespace TEST_C01
             flag_drawtype = 3;
         }
 
-        private void picture_window_MouseDown(object sender, MouseEventArgs e)
+        private void picture_panel_MouseDown(object sender, MouseEventArgs e)
         {
             if (flag_drawtype == 0)
             {
@@ -117,10 +92,10 @@ namespace TEST_C01
             pen.Color = dColor;
             sBrush.Color = fColor;
         }
-        private void picture_window_MouseMove(object sender, MouseEventArgs e)
+        private void picture_panel_MouseMove(object sender, MouseEventArgs e)
         {
-            Graphics graphics = Graphics.FromImage(draw_area);
-            //Graphics graphics = picture_window.CreateGraphics();
+            //Graphics graphics = Graphics.FromImage(draw_area);
+            Graphics graphics = picture_panel.CreateGraphics();
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
             if (isDrawing == true)
             {
@@ -130,7 +105,7 @@ namespace TEST_C01
             }
             toolStripStatusLabel1.Text = "현재위치: " + e.X + ", " + e.Y;
         }
-        private void picture_window_MouseUp(object sender, MouseEventArgs e)
+        private void picture_panel_MouseUp(object sender, MouseEventArgs e)
         {
             ePoint.X = e.X;
             ePoint.Y = e.Y;
@@ -180,20 +155,21 @@ namespace TEST_C01
             {
                 point.Y = ePoint.Y;
             }
-            if (flag_drawtype >= 1 && flag_drawtype <=3)
+            if (flag_drawtype >= 1 && flag_drawtype <= 3)
             {
                 temp_sx[temp_count] = sPoint.X;
                 temp_sy[temp_count] = sPoint.Y;
                 temp_ex[temp_count] = ePoint.X;
                 temp_ey[temp_count] = ePoint.Y;
             }
-            
+
             temp_drawtype[temp_count] = flag_drawtype;
             move_x = ePoint.X - sPoint.X; //이동
             move_y = ePoint.Y - sPoint.Y; //이동
 
             Rectangle guide_rect = new Rectangle(point.X, point.Y, Math.Abs(move_x), Math.Abs(move_y));
-            Graphics graphics = Graphics.FromImage(draw_area);
+            //Graphics graphics = Graphics.FromImage(draw_area);
+            Graphics graphics = picture_panel.CreateGraphics();
 
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -225,11 +201,6 @@ namespace TEST_C01
                     graphics.Clear(Color.White);
                     for (int i = 0; i < temp_num; i++)
                     {
-                        temp_sx[i] = temp_sx[i] + move_x;
-                        temp_sy[i] = temp_sy[i] + move_y;
-                        temp_ex[i] = temp_ex[i] + move_x;
-                        temp_ey[i] = temp_ey[i] + move_y;
-
                         if (temp_sx[i] <= temp_ex[i])
                         {
                             point.X = temp_sx[i];
@@ -246,7 +217,7 @@ namespace TEST_C01
                         {
                             point.Y = temp_ey[i];
                         }
-                        Rectangle guide_rect_move = new Rectangle(point.X, point.Y, Math.Abs(temp_sx[i] - temp_ex[i]), Math.Abs(temp_sy[i] - temp_ey[i]));
+                        Rectangle guide_rect_move = new Rectangle(point.X + move_x, point.Y + move_y, Math.Abs(temp_sx[i] - temp_ex[i]), Math.Abs(temp_sy[i] - temp_ey[i]));
                         if (temp_drawtype[i] == 1)
                         {
                             graphics.DrawRectangle(pen, guide_rect_move);
@@ -259,45 +230,38 @@ namespace TEST_C01
                         }
                         if (temp_drawtype[i] == 3)
                         {
-                            Point move_start = new Point (temp_sx[i], temp_sy[i]);
-                            Point move_end = new Point(temp_ex[i], temp_ey[i]);
+                            Point move_start = new Point(temp_sx[i] + move_x, temp_sy[i] + move_y);
+                            Point move_end = new Point(temp_ex[i] + move_x, temp_ey[i] + move_y);
                             graphics.DrawLine(pen, move_start, move_end);
                         }
                     }
                     break;
             }
-            temp_Canvas(picture_window, e);
         }
 
         private void 새그림ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Graphics graphics = picture_window.CreateGraphics();
+            /*
+            Bitmap draw_area_temp = new Bitmap(800, 600);
+            draw_area = draw_area_temp;
+            Graphics graphics = picture_panel.CreateGraphics();
+            //Graphics graphics = Graphics.FromImage(draw_area_temp);
             graphics.Clear(Color.White);
-            for (int i=0; i < temp_num; i++ )
-            {
-                temp_sx[i] = 0;
-                temp_sy[i] = 0;
-                temp_ex[i] = 0;
-                temp_ey[i] = 0;
-                temp_drawtype[i]=0;
-            }
+             * */
+            Graphics graphics = picture_panel.CreateGraphics();
+            graphics.Clear(Color.White);
+        }
+        public void new_canvas(PictureBox pb)
+        {
             /*
             Bitmap draw_area_temp = new Bitmap(800, 600);
             draw_area = draw_area_temp;
             Graphics graphics = Graphics.FromImage(draw_area_temp);
             graphics.Clear(Color.White);
-             * */
-        }
-        public void new_canvas(PictureBox pb)
-        {
-            Bitmap draw_area_temp = new Bitmap(800, 600);
-            draw_area = draw_area_temp;
-            Graphics graphics = Graphics.FromImage(draw_area_temp);
-            graphics.Clear(Color.White);
-
             Graphics paint_graphics = Graphics.FromImage(draw_area);
             paint_graphics.SmoothingMode = SmoothingMode.AntiAlias;
             pb.Image = draw_area;
+             * */
         }
 
         private void Trans_CheckStateChanged(object sender, EventArgs e)
@@ -340,7 +304,7 @@ namespace TEST_C01
                     myStream.Close();
                 }
             }
-            save_Canvas(picture_window, e);
+
         }
         private void PenWidth_bar_Scroll(object sender, EventArgs e)
         {
