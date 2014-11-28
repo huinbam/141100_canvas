@@ -43,8 +43,8 @@
             this.Line = new System.Windows.Forms.ToolStripButton();
             this.DrawFree = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.확대 = new System.Windows.Forms.ToolStripButton();
+            this.축소 = new System.Windows.Forms.ToolStripButton();
             this.이동 = new System.Windows.Forms.ToolStripButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
@@ -78,8 +78,8 @@
             this.Line,
             this.DrawFree,
             this.toolStripSeparator3,
-            this.toolStripButton1,
-            this.toolStripButton2,
+            this.확대,
+            this.축소,
             this.이동});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -195,23 +195,25 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
             // 
-            // toolStripButton1
+            // 확대
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(43, 28);
-            this.toolStripButton1.Text = "확대+";
+            this.확대.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.확대.Image = ((System.Drawing.Image)(resources.GetObject("확대.Image")));
+            this.확대.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.확대.Name = "확대";
+            this.확대.Size = new System.Drawing.Size(43, 28);
+            this.확대.Text = "확대+";
+            this.확대.Click += new System.EventHandler(this.확대_Click);
             // 
-            // toolStripButton2
+            // 축소
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(40, 28);
-            this.toolStripButton2.Text = "축소-";
+            this.축소.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.축소.Image = ((System.Drawing.Image)(resources.GetObject("축소.Image")));
+            this.축소.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.축소.Name = "축소";
+            this.축소.Size = new System.Drawing.Size(40, 28);
+            this.축소.Text = "축소-";
+            this.축소.Click += new System.EventHandler(this.축소_Click);
             // 
             // 이동
             // 
@@ -350,8 +352,8 @@
         private System.Windows.Forms.ListBox DashStyle_box;
         private System.Windows.Forms.PictureBox picture_window;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton 확대;
+        private System.Windows.Forms.ToolStripButton 축소;
         private System.Windows.Forms.ToolStripButton 이동;
     }
 }

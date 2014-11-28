@@ -25,12 +25,17 @@ namespace TEST_C01
         bool check_trans = false;
         Bitmap draw_area = new Bitmap(800, 600);
 
-        public const int temp_num = 20;
-        int[] temp_sx = new int[temp_num];
-        int[] temp_sy = new int[temp_num];
-        int[] temp_ex = new int[temp_num];
-        int[] temp_ey = new int[temp_num];
-        int[] temp_drawtype = new int[temp_num];
+        public const int TEMP_NUM = 20;
+        public const float ZOOM_RATE = 0.7f;
+
+        int[] temp_sx = new int[TEMP_NUM];
+        int[] temp_sy = new int[TEMP_NUM];
+        int[] temp_ex = new int[TEMP_NUM];
+        int[] temp_ey = new int[TEMP_NUM];
+        int[] temp_drawtype = new int[TEMP_NUM];
+        Pen[] temp_pen = new Pen[TEMP_NUM]; // ------------ 여기
+        Brush[] temp_brush = new Brush[TEMP_NUM];
+        Color[] temp_bColor = new Color[TEMP_NUM]; // ------------ 여기
         int temp_count = 0;
 
         int count = 0;
@@ -186,6 +191,8 @@ namespace TEST_C01
                 temp_sy[temp_count] = sPoint.Y;
                 temp_ex[temp_count] = ePoint.X;
                 temp_ey[temp_count] = ePoint.Y;
+                temp_pen[temp_count] = pen;
+                temp_brush[temp_count] = sBrush;
             }
             
             temp_drawtype[temp_count] = flag_drawtype;
@@ -221,9 +228,9 @@ namespace TEST_C01
                     pen.DashCap = DashCap.Flat; //원래대로
                     temp_count++;
                     break;
-                case 4:
+                case 4: // ------------ 여기
                     graphics.Clear(Color.White);
-                    for (int i = 0; i < temp_num; i++)
+                    for (int i = 0; i < TEMP_NUM; i++)
                     {
                         temp_sx[i] = temp_sx[i] + move_x;
                         temp_sy[i] = temp_sy[i] + move_y;
@@ -249,7 +256,114 @@ namespace TEST_C01
                         Rectangle guide_rect_move = new Rectangle(point.X, point.Y, Math.Abs(temp_sx[i] - temp_ex[i]), Math.Abs(temp_sy[i] - temp_ey[i]));
                         if (temp_drawtype[i] == 1)
                         {
-                            graphics.DrawRectangle(pen, guide_rect_move);
+                            graphics.DrawRectangle(temp_pen[i], guide_rect_move); // ------------ 여기
+                            //graphics.DrawRectangle(pen, guide_rect_move);
+                            graphics.FillRectangle(sBrush, guide_rect_move);
+                        }
+                        if (temp_drawtype[i] == 2)
+                        {
+                            graphics.DrawEllipse(pen, guide_rect_move);
+                            graphics.FillEllipse(sBrush, guide_rect_move);
+                        }
+                        if (temp_drawtype[i] == 3)
+                        {
+                            Point move_start = new Point (temp_sx[i], temp_sy[i]);
+                            Point move_end = new Point(temp_ex[i], temp_ey[i]);
+                            graphics.DrawLine(pen, move_start, move_end);
+                        }
+                    }
+                    break;
+                case 5: //가변확대
+                     graphics.Clear(Color.White);
+                    for (int i = 0; i < TEMP_NUM; i++)
+                    {
+                        float variable_zoom_rate = 1;
+                        variable_zoom_rate = (float)(Math.Sqrt(move_x ^ 2 + move_y ^ 2)*(ZOOM_RATE));
+                        if(variable_zoom_rate==0)
+                        {
+                            variable_zoom_rate = 1;
+                        }
+                        float temp__sx = (temp_sx[i] - sPoint.X) * variable_zoom_rate + sPoint.X;
+                        float temp__sy = (temp_sy[i] - sPoint.Y) * variable_zoom_rate + sPoint.Y;
+                        float temp__ex = (temp_ex[i] - sPoint.X) * variable_zoom_rate + sPoint.X;
+                        float temp__ey = (temp_ey[i] - sPoint.Y) * variable_zoom_rate + sPoint.Y;
+
+                        temp_sx[i] = (int)(temp__sx);
+                        temp_sy[i] = (int)(temp__sy);
+                        temp_ex[i] = (int)(temp__ex);
+                        temp_ey[i] = (int)(temp__ey);
+
+                        if (temp_sx[i] <= temp_ex[i])
+                        {
+                            point.X = temp_sx[i];
+                        }
+                        else
+                        {
+                            point.X = temp_ex[i];
+                        }
+                        if (temp_sy[i] <= temp_ey[i])
+                        {
+                            point.Y = temp_sy[i];
+                        }
+                        else
+                        {
+                            point.Y = temp_ey[i];
+                        }
+                        Rectangle guide_rect_move = new Rectangle(point.X, point.Y, Math.Abs(temp_sx[i] - temp_ex[i]), Math.Abs(temp_sy[i] - temp_ey[i]));
+                        if (temp_drawtype[i] == 1)
+                        {
+                            graphics.DrawRectangle(temp_pen[i], guide_rect_move); // ------------ 여기
+                            //graphics.DrawRectangle(pen, guide_rect_move);
+                            graphics.FillRectangle(sBrush, guide_rect_move);
+                        }
+                        if (temp_drawtype[i] == 2)
+                        {
+                            graphics.DrawEllipse(pen, guide_rect_move);
+                            graphics.FillEllipse(sBrush, guide_rect_move);
+                        }
+                        if (temp_drawtype[i] == 3)
+                        {
+                            Point move_start = new Point (temp_sx[i], temp_sy[i]);
+                            Point move_end = new Point(temp_ex[i], temp_ey[i]);
+                            graphics.DrawLine(pen, move_start, move_end);
+                        }
+                    }
+                    break;
+                case 6: //고전축소
+                    graphics.Clear(Color.White);
+                    for (int i = 0; i < TEMP_NUM; i++)
+                    {
+                        float temp__sx = (temp_sx[i] - sPoint.X) * ZOOM_RATE + sPoint.X;
+                        float temp__sy = (temp_sy[i] - sPoint.Y) * ZOOM_RATE + sPoint.Y;
+                        float temp__ex = (temp_ex[i] - sPoint.X) * ZOOM_RATE + sPoint.X;
+                        float temp__ey = (temp_ey[i] - sPoint.Y) * ZOOM_RATE + sPoint.Y;
+
+                        temp_sx[i] = (int)(temp__sx);
+                        temp_sy[i] = (int)(temp__sy);
+                        temp_ex[i] = (int)(temp__ex);
+                        temp_ey[i] = (int)(temp__ey);
+
+                        if (temp_sx[i] <= temp_ex[i])
+                        {
+                            point.X = temp_sx[i];
+                        }
+                        else
+                        {
+                            point.X = temp_ex[i];
+                        }
+                        if (temp_sy[i] <= temp_ey[i])
+                        {
+                            point.Y = temp_sy[i];
+                        }
+                        else
+                        {
+                            point.Y = temp_ey[i];
+                        }
+                        Rectangle guide_rect_move = new Rectangle(point.X, point.Y, Math.Abs(temp_sx[i] - temp_ex[i]), Math.Abs(temp_sy[i] - temp_ey[i]));
+                        if (temp_drawtype[i] == 1)
+                        {
+                            graphics.DrawRectangle(temp_pen[i], guide_rect_move); // ------------ 여기
+                            //graphics.DrawRectangle(pen, guide_rect_move);
                             graphics.FillRectangle(sBrush, guide_rect_move);
                         }
                         if (temp_drawtype[i] == 2)
@@ -273,13 +387,15 @@ namespace TEST_C01
         {
             Graphics graphics = picture_window.CreateGraphics();
             graphics.Clear(Color.White);
-            for (int i=0; i < temp_num; i++ )
+            for (int i=0; i < TEMP_NUM; i++ )
             {
                 temp_sx[i] = 0;
                 temp_sy[i] = 0;
                 temp_ex[i] = 0;
                 temp_ey[i] = 0;
                 temp_drawtype[i]=0;
+                temp_pen[i] = null;
+                temp_brush[i] = null;
             }
             /*
             Bitmap draw_area_temp = new Bitmap(800, 600);
@@ -372,6 +488,15 @@ namespace TEST_C01
         private void 이동_Click(object sender, EventArgs e)
         {
             flag_drawtype = 4;
+        }
+
+        private void 확대_Click(object sender, EventArgs e)
+        {
+            flag_drawtype = 5;
+        }
+        private void 축소_Click(object sender, EventArgs e)
+        {
+            flag_drawtype = 6;
         }
     }
 }
